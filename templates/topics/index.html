@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}My home page{% endblock title %}
+
+{% block content %}
+    <h1>Welcome to my homepage!</h1>
+
+    {% if user %}
+        <h2>{{user.username}}</h2>
+    {% endif %}
+
+    <p>I am very proud of it :)</p>
+
+    <table border="1">
+
+        {% if topics %}
+        <tr>
+            <th>Topic</th>
+            <th>Author</th>
+            <th>Date created</th>
+        </tr>
+        {% endif %}
+
+        {% for topic in topics %}
+            <tr>
+                <td><a href="/topic/{{topic.id}}">{{ topic.title }}</a></td>
+                <td>{{ topic.author.username }}</td>
+                <td>{{ topic.created }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

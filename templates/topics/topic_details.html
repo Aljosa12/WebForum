@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ topic.title }}{% endblock title %}
+
+{% block content %}
+
+{% if user.id == topic.author.id %}
+<p>
+    <a href="/topic/{{topic.id}}/edit">Edit</a> |
+    <a href="/topic/{{topic.id}}/delete">Delete</a>
+</p>
+{% endif %}
+
+<h1>{{ topic.title }}</h1>
+
+<small>Posted by {{ topic.author.username }} on {{ topic.created.strftime('%d %b %Y') }}</small>
+
+<p>{{ topic.text }}</p>
+
+<hr>
+
+{% if user %}
+    <form method="post" action="/topic/{{topic.id}}/create-comment">
+        <input type="hidden" name="csrf" value="{{ csrf_token }}">
+
+        <textarea name="text" rows="5" placeholder="Enter your comment" required></textarea>
+
+        <button>Submit</button>
+    </form>
+{% endif %}
+
+{% for comment in comments %}
+    <p><strong>{{comment.author.username}}:</strong> {{ comment.text }}</p>
+
+    {% if user.username == comment.author.username %}
+             <form method="post" action="/comment/{{comment.id}}/delete">
+                 <input type="hidden" name="csrf" value="{{ csrf_token }}">
+                 <button type="submit" class="btn btn-danger">Yes, delete</button>
+             </form>
+    {% endif %}
+
+{% endfor %}
+
+{% endblock content %}

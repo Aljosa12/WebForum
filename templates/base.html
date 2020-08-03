@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock title %}</title>
+    </head>
+
+    <body>
+        <p>
+            <a href="/">Home</a> |
+            {% if not user %}
+                <a href="/signup">Signup</a> |
+                <a href="/login">Login</a>
+            {% endif %}
+
+            {% if user %}
+                <a href="/create-topic">Create topic</a> |
+                <a href="/logout">Logout</a>
+            {% endif %}
+        </p>
+
+        {% block content %}{% endblock content %}
+    </body>
+
+</html>
