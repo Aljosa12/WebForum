@@ -34,8 +34,8 @@
 
     {% if user.username == comment.author.username %}
              <form method="post" action="/comment/{{comment.id}}/delete">
-                 <input type="hidden" name="csrf" value="{{ csrf_token }}">
-                 <button type="submit" class="btn btn-danger">Yes, delete</button>
+                 <input style="display: inline;" type="hidden" name="csrf" value="{{ csrf_token }}">
+                 <button type="submit" class="btn btn-danger">delete</button>
              </form>
     {% endif %}
 
