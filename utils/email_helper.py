@@ -34,7 +34,3 @@ def send_email(receiver_email, subject, text):
         print(response.text)
     else:
         print("No env vars or no email address")
-        print("The email was not sent.")
-        print("If it was sent, this would be the subject: {}".format(subject))
-        print("This would be the text: {}".format(text))
-        print("And this would be the receiver: {}".format(receiver_email))
