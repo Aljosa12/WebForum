@@ -1,11 +1,12 @@
-from flask import render_template, request, redirect, url_for, make_response, Blueprint
-
-from models.settings import db
-from models.user import User
+import hashlib
+import os
+import uuid
+from flask import Blueprint, render_template, request, redirect, url_for, make_response
 from utils.auth_helper import user_from_session_token
 
-import hashlib
-import uuid
+from models.user import User
+from models.settings import db
+from utils.email_helper import send_email
 
 auth_handlers = Blueprint("auth", __name__)
 

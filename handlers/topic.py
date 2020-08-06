@@ -1,9 +1,11 @@
-from flask import render_template, request, redirect, url_for, make_response, Blueprint
+import os
+
+from flask import render_template, request, redirect, url_for, Blueprint
 
 from models.settings import db
 from models.topic import Topic
 from models.comment import Comment
-import os
+from models.user import User
 
 from utils.redis_helper import create_csrf_token, validate_csrf
 from utils.auth_helper import user_from_session_token
@@ -35,7 +37,7 @@ def topic_create():
             # create a topic object
             topic = Topic.create(title=title, text=text, author=user)
 
-            return redirect(url_for('index'))
+            return redirect(url_for('topic.index'))
 
         else:
             return "CSRF token is not valid"
@@ -54,10 +56,8 @@ def topic_details(topic_id):
         get_random_num()
     # END test background tasks €wsee¸dx;:
 
-    if not user:
-        return render_template("topics/topic_details.html", topic=topic, user=user, comments=comments)
-
-    return render_template("topics/topic_details.html", topic=topic, user=user, csrf_token=create_csrf_token(user.username), comments=comments)
+    return render_template("topic/topic_details.html", topic=topic, user=user,
+                           csrf_token=create_csrf_token(user.username), comments=comments)
 
 
 @topic_handlers.route("/topic/<topic_id>/edit", methods=["GET", "POST"])
