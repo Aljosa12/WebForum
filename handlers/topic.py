@@ -37,7 +37,7 @@ def topic_create():
             # create a topic object
             topic = Topic.create(title=title, text=text, author=user)
 
-            return redirect(url_for('topic.index'))
+            return redirect(url_for('index'))
 
         else:
             return "CSRF token is not valid"
