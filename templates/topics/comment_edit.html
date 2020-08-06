@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ comment.id }}{% endblock title %}
+
+{% block content %}
+
+    <h1>Edit comment: {{ comment.text }}</h1>
+
+    <form method="post">
+        <textarea name="text" rows="5" required>{{ comment.text }}</textarea> <br>
+        <button>Submit</button>
+    </form>
+
+{% endblock content %}
