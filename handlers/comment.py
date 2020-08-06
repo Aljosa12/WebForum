@@ -43,42 +43,6 @@ def topic_delete(comment_id):
         return redirect(url_for('index', comment=comment))
 
 
-@comment_handlers.route("/comment/<comment_id>/edit", methods=["GET", "POST"])
-def comment_edit(comment_id):
-    comment = db.query(Comment).get(int(comment_id))  # get comment from db by ID
-
-    # get current user
-    session_token = request.cookies.get("session_token")
-    user = db.query(User).filter_by(session_token=session_token).first()
-
-    # check if user logged in & if user is author
-    if not user:
-        return redirect(url_for('auth.login'))
-    elif comment.author.id != user.id:
-        return "You can only edit your own comments!"
-
-    # GET request
-    if request.method == "GET":
-        csrf_token = create_csrf_token(username=user.username)
-        return render_template("comment/comment_edit.html", comment=comment, csrf_token=csrf_token)
-
-    # POST request
-    elif request.method == "POST":
-        text = request.form.get("text")
-
-        # check CSRF tokens
-        csrf = request.form.get("csrf")
-
-        if validate_csrf(csrf, user.username):
-            # if it validates, edit the comment
-            comment.text = text
-            db.add(comment)
-            db.commit()
-            return redirect(url_for('topic.topic_details', topic_id=comment.topic.id))
-        else:
-            return "CSRF error: tokens don't match!"
-
-
 @comment_handlers.route("/comment/<comment_id>/delete", methods=["POST"])
 def comment_delete(comment_id):
     comment = db.query(Comment).get(int(comment_id))  # get comment from db by ID
@@ -105,3 +69,30 @@ def comment_delete(comment_id):
         return redirect(url_for('topic.topic_details', topic_id=topic_id))
     else:
         return "CSRF error: tokens don't match!"
+
+
+@comment_handlers.route("/comment/<comment_id>/edit", methods=["GET", "POST"])
+def comment_edit(comment_id):
+    comment = db.query(Comment).get(int(comment_id))  # get comment from db by ID
+
+    # get current user
+    session_token = request.cookies.get("session_token")
+    user = db.query(User).filter_by(session_token=session_token).first()
+
+    # check if user is logged in and user is author
+    if not user:
+        redirect(url_for("auth/login"))
+    elif comment.author.id != user.id:
+        return "You are not an author"
+
+    if request.method == "GET":
+        return render_template("topics/comment_edit.html", comment=comment)
+
+    # POST request
+    elif request.method == "POST":
+        text = request.form.get("text")
+
+        comment.text = text
+        db.add(comment)
+        db.commit()
+        return redirect(url_for('topic.topic_details', topic_id=comment.topic.id))

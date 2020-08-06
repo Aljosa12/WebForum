@@ -3,6 +3,7 @@ from flask import render_template, request, redirect, url_for, make_response, Bl
 from models.settings import db
 from models.topic import Topic
 from models.comment import Comment
+import os
 
 from utils.redis_helper import create_csrf_token, validate_csrf
 from utils.auth_helper import user_from_session_token
@@ -46,6 +47,12 @@ def topic_details(topic_id):
 
     user = user_from_session_token()
     comments = db.query(Comment).filter_by(topic=topic).all()
+
+    # START test background tasks (TODO: delete this code later)
+    if os.getenv('REDIS_URL'):
+        from task import get_random_num
+        get_random_num()
+    # END test background tasks €wsee¸dx;:
 
     if not user:
         return render_template("topics/topic_details.html", topic=topic, user=user, comments=comments)
