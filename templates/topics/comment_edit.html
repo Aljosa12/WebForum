@@ -4,11 +4,13 @@
 
 {% block content %}
 
-    <h1>Edit comment: {{ comment.text }}</h1>
+    <h1 class="HELLO">Edit comment</h1>
 
-    <form method="post">
-        <textarea name="text" rows="5" required>{{ comment.text }}</textarea> <br>
-        <button>Submit</button>
-    </form>
+    <div class="topic-list-item signupbck">
+        <form method="post">
+            <textarea name="text" rows="5" required>{{ comment.text }}</textarea> <br>
+            <button>Submit</button>
+        </form>
+    </div>
 
 {% endblock content %}

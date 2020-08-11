@@ -4,12 +4,14 @@
 
 {% block content %}
 
-    <h1>Edit topic: {{ topic.title }}</h1>
+    <h1 class="HELLO">Edit topic: {{ topic.title }}</h1>
 
-    <form method="post">
-        <input type="text" name="title" value="{{ topic.title}} "><br>
-        <textarea name="text" rows="5" required>{{ topic.text }}</textarea> <br>
-        <button>Submit</button>
-    </form>
+    <div class="topic-list-item signupbck">
+        <form method="post">
+            <input type="text" name="title" value="{{ topic.title}} "><br>
+            <textarea name="text" rows="5" required>{{ topic.text }}</textarea> <br>
+            <button>Submit</button>
+        </form>
+    </div>
 
 {% endblock content %}

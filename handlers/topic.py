@@ -5,7 +5,6 @@ from flask import render_template, request, redirect, url_for, Blueprint
 from models.settings import db
 from models.topic import Topic
 from models.comment import Comment
-from models.user import User
 
 from utils.redis_helper import create_csrf_token, validate_csrf
 from utils.auth_helper import user_from_session_token

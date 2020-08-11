@@ -3,30 +3,32 @@
 {% block title %}My home page{% endblock title %}
 
 {% block content %}
-    <h1>Welcome to my homepage!</h1>
+    <h1 class="HELLO">Welcome to my forum!</h1>
 
-    {% if user %}
-        <h2>{{user.username}}</h2>
-    {% endif %}
 
-    <p>I am very proud of it :)</p>
+    <div class="topic-list-item">
+        <table class="table" border="1">
+                {% if topics %}
+                    <tr class="nav-topics-list">
+                        <th>Topic</th>
+                        <th>Author</th>
+                        <th>Date created</th>
+                    </tr>
 
-    <table border="1">
+                {% endif %}
+                <div class="topics-items">
+                    {% for topic in topics %}
+                        <tr class="topic-cell">
+                            <td><a href="/topic/{{topic.id}}">{{ topic.title }}</a></td>
+                            <td>{{ topic.author.username }}</td>
+                            <td>{{ topic.created }}</td>
+                        </tr>
+                    {% endfor %}
 
-        {% if topics %}
-        <tr>
-            <th>Topic</th>
-            <th>Author</th>
-            <th>Date created</th>
-        </tr>
-        {% endif %}
+                </div>
 
-        {% for topic in topics %}
-            <tr>
-                <td><a href="/topic/{{topic.id}}">{{ topic.title }}</a></td>
-                <td>{{ topic.author.username }}</td>
-                <td>{{ topic.created }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+        </table>
+
+         <!-- <img src="../static/logo.png" alt="logo"> -->
+    </div>
 {% endblock content %}

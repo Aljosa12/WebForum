@@ -4,45 +4,62 @@
 
 {% block content %}
 
-{% if user.id == topic.author.id %}
-<p>
-    <a href="/topic/{{topic.id}}/edit">Edit</a> |
-    <a href="/topic/{{topic.id}}/delete">Delete</a>
-</p>
-{% endif %}
+<h1 class="HELLO">{{ topic.title }}</h1>
 
-<h1>{{ topic.title }}</h1>
+<small style="color: #565961;">Posted by {{ topic.author.username }} on {{ topic.created.strftime('%d %b %Y') }}</small>
 
-<small>Posted by {{ topic.author.username }} on {{ topic.created.strftime('%d %b %Y') }}</small>
-
-<p>{{ topic.text }}</p>
-
-<hr>
-
-{% if user %}
-    <form method="post" action="/topic/{{topic.id}}/create-comment">
-        <input type="hidden" name="csrf" value="{{ csrf_token }}">
-
-        <textarea name="text" rows="5" placeholder="Enter your comment" required></textarea>
-
-        <button>Submit</button>
-    </form>
-{% endif %}
-
-{% for comment in comments %}
-    <p style="display: inline;"><strong>{{comment.author.username}}:</strong> {{ comment.text }}</p>
-
-    {% if user.username == comment.author.username %}
-             <form style="display: inline;" method="post" action="/comment/{{comment.id}}/delete">
-                 <input type="hidden" name="csrf" value="{{ csrf_token }}">
-                 <button type="submit" class="btn btn-danger">delete</button>
-             </form>
-            <a href="/comment/{{comment.id}}/edit" class="card-link">
-                <button type="submit" class="btn btn-danger">edit</button>
-            </a>
-
+<div class="topic-details">
+    {% if user.id == topic.author.id %}
+    <div class="edit-delete-details">
+        <p>
+            <a class="edit-delete-topic" href="/topic/{{topic.id}}/edit">Edit</a>
+            <a class="edit-delete-topic" href="/topic/{{topic.id}}/delete">Delete</a>
+        </p>
+    </div>
     {% endif %}
-    <br>
-{% endfor %}
+
+    <p class="topic-text">{{ topic.text }}</p>
+
+    {% if user %}
+    <div class="comment">
+        <form method="post" action="/topic/{{topic.id}}/create-comment">
+            <input type="hidden" name="csrf" value="{{ csrf_token }}">
+
+            <textarea name="text" rows="5" placeholder="Enter your comment" required></textarea>
+
+            <button>Submit</button>
+        </form>
+    </div>
+    {% endif %}
+
+    <div class="comments-display">
+
+        {% for comment in comments %}
+            <div class="abc">
+
+                <p style="display: inline;">
+                    <strong>{{comment.author.username}}:</strong> <p class="text-comment">{{ comment.text }}</p>
+                </p>
+
+                {% if user.username == comment.author.username %}
+                <div class="edit-delete-comment">
+                    <form style="display: inline;" method="post" action="/comment/{{comment.id}}/delete">
+                         <input type="hidden" name="csrf" value="{{ csrf_token }}">
+                         <button type="submit" class="btn btn-danger">delete</button>
+                     </form>
+                    <a href="/comment/{{comment.id}}/edit" class="card-link">
+                        <button type="submit" class="btn btn-danger">edit</button>
+                    </a>
+
+                </div>
+                {% endif %}
+
+            </div>
+
+        <br>
+    {% endfor %}
+    </div>
+
+</div>
 
 {% endblock content %}

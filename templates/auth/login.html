@@ -4,19 +4,29 @@
         <meta charset="UTF-8">
         <title>Login | Ninja Tech Forum</title>
 
-        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="../static/style4.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
     </head>
 
     <body>
-        <p><a href="/">Home</a> | <a href="/signup">Signup</a> | <a href="/login">Login</a></p>
+        <p>
+            <div class="nav">
+                    <a href="/">Home</a>
+                    <a href="/signup">Signup</a>
+                    <a href="/login">Login</a>
+            </div>
+        </p>
 
-        <h1>Login</h1>
+        <h1 class="HELLO">Login to my forum !</h1>
 
-        <form method="post">
-            <input type="text" name="username" placeholder="Enter your username" required> <br>
-            <input type="password" name="password" placeholder="Enter your password" required> <br>
+        <div class="topic-list-item loginbck">
+            <form method="post">
+                <input type="text" name="username" placeholder="Enter your username" required> <br>
+                <input type="password" name="password" placeholder="Enter your password" required> <br>
 
-            <button>Login</button>
-        </form>
+                <button>Login</button>
+            </form>
+        </div>
+
     </body>
 </html>

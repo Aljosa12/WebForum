@@ -4,20 +4,26 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock title %}</title>
+        <link rel="stylesheet" type="text/css" href="/static/style4.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
     </head>
 
     <body>
         <p>
-            <a href="/">Home</a> |
-            {% if not user %}
-                <a href="/signup">Signup</a> |
-                <a href="/login">Login</a>
-            {% endif %}
+            <div class="nav">
+                    <a href="/">Home</a>
+                {% if not user %}
+                    <a href="/signup">Signup</a>
+                    <a href="/login">Login</a>
+                {% endif %}
 
-            {% if user %}
-                <a href="/create-topic">Create topic</a> |
-                <a href="/logout">Logout</a>
-            {% endif %}
+                {% if user %}
+                    <a href="/create-topic">Create topic</a>
+                    <a href="/logout">Logout</a>
+                {% endif %}
+            </div>
+
+
         </p>
 
         {% block content %}{% endblock content %}
