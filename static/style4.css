@@ -42,7 +42,7 @@ img {
     background-color: #393b40;
     margin-left: 10%;
     margin-top: 40px;
-    height: 800px;
+    height: 1200px;
     border-radius: 20px;
     color: white;
     padding-top: 20px;
@@ -198,7 +198,7 @@ img {
     background-color: #393b40;
     margin-left: 10%;
     margin-top: 40px;
-    height: 800px;
+    height: 1200px;
     border-radius: 20px;
     color: white;
     padding-top: 20px;
@@ -209,8 +209,10 @@ img {
         background-color: #393b40;
         border-bottom: 0.5px solid #7f351c;
         border-top: 0.5px solid #7f351c;
-        padding: 20px;
+        padding: 20px 160px;
         margin-top: 20px;
+        margin-left: 22px;
+        margin-right: 22px;
 }
 
 .topic-details form{
@@ -261,6 +263,17 @@ img {
     text-align: center;
 }
 
+.comment p{
+    margin : 60px auto -20px auto;
+    border:none;
+    background-color: #393b40;
+    color:#fff;
+    font-weight: 600;
+    text-align: center;
+    border-top: solid 1px #7f351c;
+    width: 100px;
+}
+
 .comment button:hover{
     background-color: #fa8d69;
     cursor: pointer;
@@ -270,7 +283,7 @@ img {
     background-color: #393b40;
     margin-right: 22px;
     margin-left: 22px;
-    margin-top: 20px;
+    margin-top: 5px;
     color: white;
     padding-top: 20px;
 }
